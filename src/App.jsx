@@ -1,34 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import React, { useState } from 'react';
 import './App.css'
+import Dashboard from './pages/Dashboard';
+import OrderList from './pages/OrderList';
+import { motion, AnimatePresence } from 'motion/react';
+
+import NavBar from './components/NavBar';
+import SideBar from './components/SideBar';
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
+
+  const [currentPage, setCurrentPage] = useState('home');
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+   const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <Dashboard />;
+      case 'overview':
+        return <OrderList />;
+      default:
+        return <Dashboard />;
+    }
+  };
+
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='flex relative'>
+      <SideBar/>
+      <div className='w-full'>
+        <NavBar/>
+        <AnimatePresence mode='wait'>
+        <main>
+          <motion.div 
+          initial={{opacity:0, y:8}}
+          animate={{opacity:1, y:0}}
+          exit={{opacity:0, y:-8}}
+          transition={{duration:0.2, ease: "easeInOut"}}
+          className='h-full'
+          >
+            {renderPage()}
+          </motion.div>         
+        </main>
+        </AnimatePresence>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      
+       
+    </div>
   )
 }
 
