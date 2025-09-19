@@ -39,7 +39,7 @@ export default function RevenueLineChart() {
   };
 
   return (
-    <div className="bg-[#F7F9FB] rounded-2xl p-4 max-w-2xl mx-auto">
+    <div className="bg-[#F7F9FB] rounded-2xl p-4">
       <div className="flex flex-wrap items-center gap-6 pb-3 px-2">
         <span className="font-semibold text-gray-800">Revenue</span>
         <span className="flex items-center gap-1 text-gray-600 text-sm">

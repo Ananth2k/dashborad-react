@@ -23,7 +23,7 @@ export default function SalesChart() {
   const centerPercent = ((mainValue / total) * 100).toFixed(1);
 
   return (
-    <div className="bg-gray-50 rounded-2xl p-6 w-full max-w-xs mx-auto flex flex-col items-center">
+    <div className="bg-gray-50 rounded-2xl p-6 w-full flex flex-col items-center">
       <div className="font-semibold text-base mb-3 text-center w-full">Total Sales</div>
       {/* Donut Chart */}
       <div className="flex flex-col items-center mb-4 w-full">

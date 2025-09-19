@@ -35,7 +35,7 @@ const products = [
 
 export default function Products() {
   return (
-    <div className="bg-gray-50 rounded-2xl p-6 w-full max-w-4xl mx-auto">
+    <div className="bg-gray-50 rounded-2xl p-6">
       <div className="font-semibold text-lg mb-3">Top Selling Products</div>
       {/* Table (desktop) */}
       <div className="hidden md:block">

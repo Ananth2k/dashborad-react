@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'motion/react';
 
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
+import Notificatoinbar from './components/Notificatoinbar';
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
         </main>
         </AnimatePresence>
       </div>
+      <Notificatoinbar/>
       
        
     </div>
