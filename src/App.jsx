@@ -6,22 +6,29 @@ import { motion, AnimatePresence } from 'motion/react';
 
 import NavBar from './components/NavBar';
 import SideBar from './components/SideBar';
+import Notificatoinbar from './components/Notificatoinbar';
 
 
 function App() {
 
-  const [currentPage, setCurrentPage] = useState('home');
+
+  const [currentPage, setCurrentPage] = useState('orderlist');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-   const renderPage = () => {
+
+  const renderPage = () => {
     switch (currentPage) {
       case 'home':
         return <Dashboard />;
-      case 'overview':
+      case 'orderlist':
         return <OrderList />;
       default:
         return <Dashboard />;
     }
   };
+
+
+
+
 
   return (
     <div className='flex relative'>
@@ -29,7 +36,7 @@ function App() {
       <div className='w-full'>
         <NavBar/>
         <AnimatePresence mode='wait'>
-        <main>
+        <main className='bg-white'>
           <motion.div 
           initial={{opacity:0, y:8}}
           animate={{opacity:1, y:0}}
@@ -41,7 +48,10 @@ function App() {
           </motion.div>         
         </main>
         </AnimatePresence>
-      </div>       
+      </div>
+      {/* <Notificatoinbar/> */}
+      
+       
     </div>
   )
 }

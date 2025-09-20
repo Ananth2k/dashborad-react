@@ -1,80 +1,80 @@
-import { Circle } from "lucide-react"; // Use for colored legend dots
+import { Card, CardContent, Typography, Box } from "@mui/material";
+import { Circle } from "lucide-react";
 
-const salesData = [
+const chartData = [
   { label: "Direct", value: 300.56, color: "#111111" },
   { label: "Affiliate", value: 135.18, color: "#B9F5CB" },
   { label: "Sponsored", value: 154.02, color: "#90B6F1" },
-  { label: "E-mail", value: 48.96, color: "#B9E7F5" },
+  { label: "E-mail", value: 48.96, color: "#B9E7F5" }
 ];
 
-const total = salesData.reduce((sum, d) => sum + d.value, 0);
-const mainValue = salesData[0].value; // Show "Direct" in donut center
+const total = chartData.reduce((sum, d) => sum + d.value, 0);
+const percent = ((chartData[0].value / total) * 100).toFixed(1);
 
 export default function SalesChart() {
-  // Calculating donut segments (SVG circle stroke-dasharray)
-  let dashArray = [];
-  let dashOffset = 0;
-  salesData.forEach((s, i) => {
-    const v = Math.round((s.value / total) * 100 * 2.64); // 2.64 ≈ perimeter/percent for r=21
-    dashArray.push(v);
+  // SVG arc calculation: each segment is shown per data value's proportion
+  // (simplified mapping for 360deg donut, r=42, circumference=2πr=264)
+  let offset = 0;
+  const arcs = chartData.map((d, idx) => {
+    const arcLen = (d.value / total) * 264;
+    const el = (
+      <circle
+        key={d.label}
+        cx={50}
+        cy={50}
+        r={42}
+        fill="none"
+        stroke={d.color}
+        strokeWidth={15}
+        strokeDasharray={`${arcLen} ${264 - arcLen}`}
+        strokeDashoffset={-offset}
+        strokeLinecap="round"
+        style={{ transition: "stroke-dasharray 1s" }}
+      />
+    );
+    offset += arcLen;
+    return el;
   });
 
-  // For displaying percentage centrally
-  const centerPercent = ((mainValue / total) * 100).toFixed(1);
-
   return (
-    <div className="bg-gray-50 rounded-2xl p-6 w-full max-w-xs mx-auto flex flex-col items-center">
-      <div className="font-semibold text-base mb-3 text-center w-full">Total Sales</div>
-      {/* Donut Chart */}
-      <div className="flex flex-col items-center mb-4 w-full">
-        <div className="relative w-[90px] h-[90px] mx-auto flex items-center justify-center">
-          <svg width={90} height={90} className="" viewBox="0 0 48 48">
-            <circle
-              cx={24} cy={24} r={21}
-              stroke="#ececec"
-              strokeWidth={6}
-              fill="none"
-            />
-            {salesData.reduce((acc, s, i) => {
-              const v = Math.round((s.value / total) * 100 * 2.64);
-              const prev = acc.offset;
-              acc.offset += v;
-              acc.segments.push(
-                <circle
-                  key={s.label}
-                  cx={24}
-                  cy={24}
-                  r={21}
-                  stroke={s.color}
-                  strokeWidth={6}
-                  fill="none"
-                  strokeDasharray={`${v} ${166 - v}`}
-                  strokeDashoffset={-prev}
-                  style={{ transition: 'stroke-dasharray 1s' }}
-                  strokeLinecap="round"
-                />
-              );
-              return acc;
-            }, {offset: 0, segments: []}).segments}
-          </svg>
-          {/* Center label */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="bg-gray-800 text-white px-3 py-1 text-xs rounded-lg font-semibold shadow">{centerPercent}%</span>
-          </div>
-        </div>
-      </div>
-      {/* Legend */}
-      <ul className="w-full mt-2 flex flex-col gap-4">
-        {salesData.map((s, i) => (
-          <li key={s.label} className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Circle size={13} fill={s.color} color={s.color} strokeWidth={0} />
-              <span className="text-gray-800">{s.label}</span>
+    <Card elevation={0} className="rounded-2xl w-full mx-auto p-0">
+      <CardContent className="!p-8 rounded-2xl bg-gray-50">
+        <Typography variant="h6" className="font-bold mb-6">
+          Total Sales
+        </Typography>
+        <Box className="flex bg-gray-50 flex-col items-center my-6">
+          <div className="relative w-[150px] h-[150px] flex items-center justify-center mx-auto">
+            <svg width="150" height="150" viewBox="0 0 100 100">
+              <circle
+                cx={50}
+                cy={50}
+                r={42}
+                stroke="#ffffffff"
+                strokeWidth={20}
+                fill="none"
+              />
+              {arcs}
+            </svg>
+            {/* Center value */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-800 text-white px-3 py-1 text-sm rounded-lg font-semibold shadow">
+              {percent}%
             </div>
-            <span className="font-semibold text-gray-800 tabular-nums">${s.value.toLocaleString()}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
+          </div>
+        </Box>
+        <ul className="w-full flex flex-col gap-3">
+          {chartData.map((d, i) => (
+            <li key={d.label} className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <Circle size={13} fill={d.color} color={d.color} strokeWidth={0} />
+                <span className="text-gray-900 text-base">{d.label}</span>
+              </div>
+              <span className="font-semibold text-gray-900 text-base tabular-nums">
+                ${d.value.toLocaleString()}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
+    </Card>
   );
 }

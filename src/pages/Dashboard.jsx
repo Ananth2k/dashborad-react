@@ -9,7 +9,7 @@ import SalesChart from '../components/charts/SalesChart'
 function Dashboard() {
   return (
    <div className='flex '>    
-    <div className="mx-auto py-5 px-3 space-y-[28px]">
+    <div className="mx-auto w-full py-5 px-3 space-y-[28px]">
       <div className='grid grid-cols-1 md:grid-cols-2 space-x-[28px]'>
         <div>
           <PriceCards/>

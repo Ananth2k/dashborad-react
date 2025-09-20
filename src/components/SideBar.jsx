@@ -11,7 +11,7 @@ import {
   Users,
   Settings,
   Globe,
-  MessageCircle
+  MessageCircle,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
@@ -64,7 +64,7 @@ export default function SideBar() {
       </AnimatePresence>
 
       {/* Sidebar */}
-      <div className="bg-white border-r border-gray-200">
+      <div className="bg-white border-r bg-white dark:bg-[#1C1C1C] border-gray-200">
 
       
       <AnimatePresence>

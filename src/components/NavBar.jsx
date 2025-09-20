@@ -9,8 +9,11 @@ import {
 } from "lucide-react";
 
 export default function NavBar() {
+     const toggleDarkMode = () => {
+        document.body.classList.toggle("dark");
+      };
   return (
-    <nav className="w-full border-b border-gray-200 bg-white flex items-center justify-between px-4 py-2">
+    <nav className="w-full border-b border-gray-200 bg-white dark:bg-[#1C1C1C] flex items-center justify-between px-4 py-2">
       {/* Left: Dashboard/Menu/Breadcrumb */}
       <div className="flex items-center gap-3 min-w-0">
         <LayoutDashboard className="w-6 h-6 text-gray-900" />
@@ -35,7 +38,7 @@ export default function NavBar() {
       </div>
       {/* Right controls */}
       <div className="flex items-center gap-3">
-        <Sun className="w-5 h-5 text-gray-700" />
+        <Sun className="w-5 h-5 text-gray-700"  onClick={toggleDarkMode} />
         <Eye className="w-5 h-5 text-gray-700" />
         <Bell className="w-5 h-5 text-gray-700" />
         <Monitor className="w-5 h-5 text-gray-700" />
