@@ -9,9 +9,12 @@ import {
 } from "lucide-react";
 
 export default function NavBar() {
+  
      const toggleDarkMode = () => {
         document.body.classList.toggle("dark");
       };
+
+
   return (
     <nav className="w-full border-b border-gray-200 bg-white dark:bg-[#1C1C1C] flex items-center justify-between px-4 py-2">
       {/* Left: Dashboard/Menu/Breadcrumb */}

@@ -12,9 +12,12 @@ Currently, two official plugins are available:
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 "# react-dashboard" 
 
-
+npm install tailwindcss @tailwindcss/vite
+npm install react-router-dom
 npm install motion
 npm install lucide-react
 npm install react react-dom
 npm install recharts react-is
 npm install @mui/material @emotion/react @emotion/styled
+npm i react-redux @reduxjs/toolkit
+npm install redux-persist
