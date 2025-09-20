@@ -10,10 +10,8 @@ import SideBar from './components/SideBar';
 
 function App() {
 
-
   const [currentPage, setCurrentPage] = useState('home');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-
    const renderPage = () => {
     switch (currentPage) {
       case 'home':
@@ -24,8 +22,6 @@ function App() {
         return <Dashboard />;
     }
   };
-
-
 
   return (
     <div className='flex relative'>
@@ -45,9 +41,7 @@ function App() {
           </motion.div>         
         </main>
         </AnimatePresence>
-      </div>
-      
-       
+      </div>       
     </div>
   )
 }
