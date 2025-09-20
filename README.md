@@ -17,3 +17,4 @@ npm install motion
 npm install lucide-react
 npm install react react-dom
 npm install recharts react-is
+npm install @mui/material @emotion/react @emotion/styled

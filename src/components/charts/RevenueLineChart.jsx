@@ -1,97 +1,115 @@
-// RevenueLineChart.jsx
-import React from "react";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Box
+} from "@mui/material";
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip
+} from "recharts";
 
-const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-const prevWeek = [12, 19, 14, 11, 18, 24];
-const currWeek = [18, 10, 9, 16, 17, 21];
-const maxValue = 30;
+// Data (values in 'M')
+const data = [
+  { name: "Jan", current: 13, previous: 10 },
+  { name: "Feb", current: 8, previous: 20 },
+  { name: "Mar", current: 10, previous: 15 },
+  { name: "Apr", current: 16, previous: 11 },
+  { name: "May", current: 22, previous: 19 },
+  { name: "Jun", current: 21, previous: 26 }
+];
+
+// Separate line segments for "prediction" dashed part
+const dashedIndex = 3; // Dashed from May onward
+
+function CustomLegend() {
+  return (
+    <Box className="flex flex-wrap items-center gap-4 mb-4">
+      <Typography fontWeight={700} className="!mr-4 !text-black">
+        Revenue
+      </Typography>
+      <div className="flex items-center text-sm text-gray-900 mr-3">
+        <span className="inline-block w-2 h-2 rounded-full bg-black mr-2" />
+        Current Week <span className="mx-1 font-bold">$58,211</span>
+      </div>
+      <div className="flex items-center text-sm text-gray-900">
+        <span className="inline-block w-2 h-2 rounded-full bg-blue-300 mr-2" />
+        Previous Week <span className="mx-1 font-bold">$68,768</span>
+      </div>
+    </Box>
+  );
+}
 
 export default function RevenueLineChart() {
-  // Helper to convert value to SVG Y-coord
-  const getY = v => 200 - (v / maxValue) * 160;
-
-  // Build smooth path using cubic bezier
-  const buildPath = arr => {
-    let d = `M 48,${getY(arr[0])}`;
-    for (let i = 1; i < arr.length; i++) {
-      const x1 = 48 + ((i - 1) * 88) + 44;
-      const x2 = 48 + (i * 88);
-      d += ` C ${x1},${getY(arr[i - 1])} ${x2 - 44},${getY(arr[i])} ${x2},${getY(arr[i])}`;
-    }
-    return d;
-  };
-
-  // Full weeks are solid, rest dotted
-  const buildPartialPath = arr => {
-    // First 4 solid, then dashed for last 2
-    let d = `M 48,${getY(arr[0])}`;
-    let i;
-    for (i = 1; i < 4; i++) {
-      const x = 48 + i * 88;
-      d += ` L ${x},${getY(arr[i])}`;
-    }
-    // Dotted segment
-    for (; i < arr.length; i++) {
-      const x = 48 + i * 88;
-      d += ` L ${x},${getY(arr[i])}`;
-    }
-    return d;
-  };
-
   return (
-    <div className="bg-[#F7F9FB] rounded-2xl p-4">
-      <div className="flex flex-wrap items-center gap-6 pb-3 px-2">
-        <span className="font-semibold text-gray-800">Revenue</span>
-        <span className="flex items-center gap-1 text-gray-600 text-sm">
-          <span className="inline-block w-2 h-2 rounded-full bg-black mr-1"></span>
-          Current Week <span className="font-bold text-gray-900">$58,211</span>
-        </span>
-        <span className="flex items-center gap-1 text-gray-600 text-sm">
-          <span className="inline-block w-2 h-2 rounded-full bg-blue-300 mr-1"></span>
-          Previous Week <span className="font-bold text-gray-900">$68,768</span>
-        </span>
-      </div>
-      <div className="bg-gray-50 rounded-xl relative overflow-hidden" style={{height: 390}}>
-        <svg width="100%" height="450" viewBox="0 0 600 240">
-          {/* Y-axis grid lines */}
-          {[0,10,20,30].map(v => (
-            <g key={v}>
-              <line x1="48" x2="550" y1={getY(v)} y2={getY(v)} stroke="#d1d5db" strokeWidth="1" />
-              <text x="10" y={getY(v)+5} fill="#cbd5e1" fontSize="13" fontWeight="bold">{v}M</text>
-            </g>
-          ))}
-          {/* Previous Week Line */}
-          <path
-            d={buildPath(prevWeek)}
-            stroke="#93c5fd"
-            strokeWidth="4"
-            fill="none"
-            strokeLinecap="round"
-          />
-          {/* Current Week Line (partial: first 4 solid, last 2 dashed) */}
-          <path
-            d={buildPartialPath(currWeek).split("L").slice(0,5).join("L")}
-            stroke="#111"
-            strokeWidth="4"
-            fill="none"
-            strokeLinecap="round"
-          />
-          <path
-            d={"M"+buildPartialPath(currWeek).split("L").slice(4).join("L")}
-            stroke="#111"
-            strokeWidth="4"
-            fill="none"
-            strokeDasharray="6 6"
-            strokeLinecap="round"
-          />
-          {/* Month labels */}
-          {months.map((m,i)=>(
-            <text key={m} x={48 + i*88} y={225} textAnchor="middle" fill="#64748b" fontSize="15">
-              {m}
-            </text>
-          ))}
-        </svg>
-      </div>
-    </div>
+    <Card
+      elevation={0}
+      className="rounded-2xl w-full max-w-4xl mx-auto p-0 bg-gray-50"
+    >
+      <CardContent className="!p-6 md:!p-8">
+        <CustomLegend />
+        <div className="relative bg-white rounded-xl overflow-hidden w-full" style={{ height: 270 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={data}>
+              <CartesianGrid stroke="#F1F5F9" vertical={false} />
+              <XAxis
+                dataKey="name"
+                tick={{ fill: "#CBD5E1", fontSize: 16 }}
+                axisLine={false}
+                tickLine={false}
+                padding={{ left: 10, right: 10 }}
+              />
+              <YAxis
+                domain={[0, 30]}
+                tick={{ fill: "#CBD5E1", fontSize: 15 }}
+                axisLine={false}
+                tickLine={false}
+                tickFormatter={v => `${v}M`}
+              />
+              <Tooltip
+                contentStyle={{ borderRadius: 10, border: 0, boxShadow: "0 2px 12px #0001" }}
+                labelStyle={{ marginBottom: 5, color: "#64748b" }}
+                formatter={(val, name) => [`${val}M`, name === "current" ? "Current" : "Previous"]}
+              />
+              {/* Previous Week: full curved line */}
+              <Line
+                type="monotone"
+                dataKey="previous"
+                stroke="#60A5FA"
+                strokeWidth={4}
+                dot={false}
+                isAnimationActive={true}
+                activeDot={{ r: 6, fill: "#60A5FA" }}
+              />
+              {/* Current Week: solid then dashed after 4th point */}
+              {/* Solid part */}
+              <Line
+                type="monotone"
+                dataKey="current"
+                stroke="#111"
+                strokeWidth={4}
+                dot={false}
+                isAnimationActive={true}
+                connectNulls
+                points={data.slice(0, dashedIndex + 1)}
+              />
+              {/* Dashed predicted part */}
+              <Line
+                type="monotone"
+                dataKey="current"
+                stroke="#111"
+                strokeWidth={4}
+                dot={false}
+                strokeDasharray="7 7"
+                data={data.map((d, i) =>
+                  i < dashedIndex ? { ...d, current: null } : d
+                )}
+                isAnimationActive={true}
+                connectNulls
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

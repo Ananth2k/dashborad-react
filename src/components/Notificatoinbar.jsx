@@ -4,6 +4,11 @@ import bug from '../assets/notification-icons/BugBeetle.svg'
 import profile from '../assets/notification-icons/profile.svg'
 import hotspot from '../assets/notification-icons/hotspot.svg'
 import contact1 from '../assets/contacts/contact-1.png'
+import contact2 from '../assets/contacts/contact-2.png'
+import contact3 from '../assets/contacts/contact-3.png'
+import contact4 from '../assets/contacts/contact-4.png'
+import contact5 from '../assets/contacts/contact-5.png'
+import contact6 from '../assets/contacts/contact-6.png'
 
 import { Bug, UploadCloud, RefreshCw } from "lucide-react";
 function Notificatoinbar() {
@@ -36,11 +41,11 @@ const feed = [
 
 const contacts = [
 {profile: contact1,name: "Natali Craig"},
-{profile: contact1,name: "Drew Cano"},
-{profile: contact1,name: "Orlando Diggs"},
-{profile: contact1,name: "Andi Lane"},
-{profile: contact1,name: "Kate Morrison"},
-{profile: contact1,name: "Koray Okumus"},
+{profile: contact2,name: "Drew Cano"},
+{profile: contact3,name: "Orlando Diggs"},
+{profile: contact4,name: "Andi Lane"},
+{profile: contact5,name: "Kate Morrison"},
+{profile: contact6,name: "Koray Okumus"},
 
 
 ]
@@ -128,7 +133,7 @@ const contacts = [
                     >
                     
                         <div className="flex flex-col items-center">
-                        <img src={item.profile} className="w-10 h-10 rounded-full" alt="profile" />
+                        <img src={item.profile} className="w-[24px] h-[24px] object-cover rounded-full" alt="profile" />
                        
                         </div>
                         <div>

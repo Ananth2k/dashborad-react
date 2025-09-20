@@ -12,19 +12,21 @@ import Notificatoinbar from './components/Notificatoinbar';
 function App() {
 
 
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState('orderlist');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-   const renderPage = () => {
+  const renderPage = () => {
     switch (currentPage) {
       case 'home':
         return <Dashboard />;
-      case 'overview':
+      case 'orderlist':
         return <OrderList />;
       default:
         return <Dashboard />;
     }
   };
+
+
 
 
 
@@ -34,7 +36,7 @@ function App() {
       <div className='w-full'>
         <NavBar/>
         <AnimatePresence mode='wait'>
-        <main>
+        <main className='bg-white'>
           <motion.div 
           initial={{opacity:0, y:8}}
           animate={{opacity:1, y:0}}
@@ -47,7 +49,7 @@ function App() {
         </main>
         </AnimatePresence>
       </div>
-      <Notificatoinbar/>
+      {/* <Notificatoinbar/> */}
       
        
     </div>
