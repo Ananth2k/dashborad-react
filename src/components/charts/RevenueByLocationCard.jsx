@@ -11,18 +11,18 @@ const maxVal = Math.max(...locations.map(l => l.value));
 
 export default function RevenueByLocationCard() {
   return (
-    <div className="bg-gray-50 rounded-2xl p-6 w-full">
-      <div className="font-semibold text-base mb-4">Revenue by Location</div>
-      <div className="relative w-full flex items-center justify-center mb-4">      
-       <img src={map} alt="map" className="w-full" />    
+    <div className="bg-[#F7F9FB] dark:bg-[#ffffff]/5 rounded-2xl p-3" >
+      <div className="font-semibold text-black dark:text-white mb-4">Revenue by Location</div>
+      <div className="relative w-full flex items-center justify-center mb-2">      
+       <img src={map} alt="map" className="w-[154px] h-[82px]" />    
        
       </div>
 
       {/* Location revenue bars */}
-      <ul className="flex flex-col gap-2">
+      <ul className="flex flex-col gap-1">
         {locations.map((loc) => (
           <li key={loc.label} className="items-center justify-between">
-            <span className="text-md font-semibold">{loc.label}</span>
+            <span className="text-[12px] text-black dark:text-white font-semibold">{loc.label}</span>
             <span className="flex items-center justify-center">
 
             
@@ -32,7 +32,7 @@ export default function RevenueByLocationCard() {
                     style={{ width: `${(loc.value / maxVal) * 100}%` }}
                 ></div>
                 </div>
-                <span className="text-sm font-semibold tabular-nums">{loc.value}K</span>
+                <span className="text-[12px] text-black dark:text-white font-semibold tabular-nums">{loc.value}K</span>
             </span>
           </li>
         ))}

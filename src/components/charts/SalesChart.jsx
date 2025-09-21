@@ -37,19 +37,21 @@ export default function SalesChart() {
   });
 
   return (
-    <Card elevation={0} className="rounded-2xl w-full mx-auto p-0">
-      <CardContent className="!p-8 rounded-2xl bg-gray-50">
-        <Typography variant="h6" className="font-bold mb-6">
+     <div className="bg-[#F7F9FB] dark:bg-[#ffffff]/5 rounded-2xl">
+    <Card sx={{ backgroundColor: 'transparent'}}
+    elevation={0} className="rounded-2xl w-full mx-auto p-0">
+      <CardContent  >
+        <h2 className="font-bold text-black dark:text-white text-[14px] mb-6">
           Total Sales
-        </Typography>
-        <Box className="flex bg-gray-50 flex-col items-center my-6">
-          <div className="relative w-[150px] h-[150px] flex items-center justify-center mx-auto">
+        </h2>
+        <Box className="flex  flex-col items-center my-6">
+          <div className="relative w-[120px] h-[120px] flex items-center justify-center mx-auto">
             <svg width="150" height="150" viewBox="0 0 100 100">
               <circle
                 cx={50}
                 cy={50}
                 r={42}
-                stroke="#ffffffff"
+                stroke="rgba(255, 255, 255, 0.01)"
                 strokeWidth={20}
                 fill="none"
               />
@@ -66,9 +68,9 @@ export default function SalesChart() {
             <li key={d.label} className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <Circle size={13} fill={d.color} color={d.color} strokeWidth={0} />
-                <span className="text-gray-900 text-base">{d.label}</span>
+                <span className="text-black dark:text-white text-[12px]">{d.label}</span>
               </div>
-              <span className="font-semibold text-gray-900 text-base tabular-nums">
+              <span className="font-semibold text-black dark:text-white text-[12px] tabular-nums">
                 ${d.value.toLocaleString()}
               </span>
             </li>
@@ -76,5 +78,6 @@ export default function SalesChart() {
         </ul>
       </CardContent>
     </Card>
+    </div>
   );
 }

@@ -1,11 +1,10 @@
 // Store.jsx
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist';
-import {activePageReducer} from './PageSlice';
+import {activePageReducer,menuReducer} from './PageSlice';
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 
-import testReducer from './slices/TestSlice';
 import {
   FLUSH,
   REHYDRATE,
@@ -23,6 +22,7 @@ const persistConfig = {
 
 const rootReducer = {
   activePage: activePageReducer,
+  menuOpen :menuReducer,
 };
 
 const persistedReducer = persistReducer(persistConfig, combineReducers(rootReducer));

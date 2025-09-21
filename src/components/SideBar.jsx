@@ -1,23 +1,15 @@
 import React from "react";
-
+import byewind from "../assets/profile/ByeWind.png"
 import {
-  LayoutDashboard,
-  TrendingUp,
-  FolderOpen,
-  PlayCircle,
-  User,
-  Grid,
-  List,
-  Layers,
-  PieChart,
-  BarChart2,
-  Users,
-  Settings,
-  Globe,
-  MessageCircle,
+  LayoutDashboard,  TrendingUp,  FolderOpen,  PlayCircle,  User,  Grid,  List,  Layers,  PieChart,
+  BarChart2,  Users,  Settings,  Globe,  MessageCircle,  Menu,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
+
+
+
 
 const dashboardItems = [
   { label: "Default", icon: <LayoutDashboard /> },
@@ -45,26 +37,21 @@ const projectItems = [
 
 
 export default function SideBar() {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-
   const [isActive, setIsActive] = useState("Default")
+  const handleActive =(label)=>{
+    setIsActive(label);
+  }
 
-const handleActive =(label)=>{
-  setIsActive(label);
-}
+  console.log(isActive)
 
 
   // For mobile: toggle
   return (
     <>
       {/* Mobile Hamburger */}
-      <button
-        className="md:hidden fixed top-2 left-2 z-50 p-2 rounded bg-gray-800 text-white"
-        onClick={() => setOpen((o) => !o)}
-        aria-label="Toggle sidebar"
-      >
-        <LayoutDashboard />
-      </button>
+     
 
       {/* Overlay for mobile */}
       <AnimatePresence>
@@ -80,7 +67,7 @@ const handleActive =(label)=>{
       </AnimatePresence>
 
       {/* Sidebar */}
-      <div className="bg-white border-r bg-white dark:bg-[#1C1C1C] border-gray-200">
+      <div className="bg-white md:border-r bg-white dark:bg-[#1C1C1C] md:border-gray-200 ">
 
       
       <AnimatePresence>
@@ -93,53 +80,58 @@ const handleActive =(label)=>{
             transition={{ type: "spring", bounce: 0.13 }}
           >
 
-            <div className="fixed md:static z-50 left-0 top-0 w-60 bg-white border-r border-gray-200 ps-3 pe-2 py-3">
+            <div className="fixed md:static z-50 left-0 top-0 w-60 border-r border-gray-200 dark:border-white/10 ps-3 pe-2 py-3">
 
 
             {/* Logo/Title */}
             <div className="font-bold text-lg flex items-center gap-2 mb-6">
-              <LayoutDashboard className="text-gray-900" /> 
-              <span className="text-gray-600">TwiWind</span>
+               <button
+        className="visible md:hidden fixed top-2 left-2 z-50 p-2 rounded bg-gray-800 text-white"
+        onClick={() => setOpen((o) => !o)}
+        aria-label="Toggle sidebar"
+      >
+      <Menu/>
+      </button>
+              <img src={byewind} alt="profile" className="w-[24px] h-[24px] rounded-full object-cover" />
+              <span className="text-black dark:text-white font-semibold text-[14px]">ByeWind</span>
             </div>
             {/* Favourites */}
-            <div className="text-xs text-gray-400 mb-1">Favorites</div>
+            <div className="text-[14px] text-gray-400 mb-1">Favorites</div>
             <div className="space-y-1 mb-3">
               <div className="pl-6 text-gray-400">Overview</div>
               <div className="pl-6 text-gray-400">Projects</div>
             </div>
             {/* Dashboards */}
-            <div className="text-xs text-gray-400 mb-1">Dashboards</div>
+            <div className="text-[14px] text-gray-400 mb-1">Dashboards</div>
             <ul className="mb-5">
               {dashboardItems.map((item) => (
-                               <motion.li
-                  key={item.label}
-                  onClick={() => handleActive(item.label)}
-                  whileHover={{ scale: 1.02 }} // small grow on hover
-                  whileTap={{ scale: 0.98 }}   // small shrink on click
-                  animate={{
-                    backgroundColor: isActive === item.label ? "#f3f4f6" : "transparent", // gray-100
-                    color: isActive === item.label ? "#000" : "#374151", // text-black vs text-gray-700
-                    fontWeight: isActive === item.label ? 600 : 400
-                  }}
-                  transition={{ duration: 0.25 }}
-                  className="flex items-center gap-2 rounded-lg cursor-pointer"
-                >
-                  {/* Left indicator bar */}
-                  <motion.span
-                    layout
-                    animate={{
-                      backgroundColor: isActive === item.label ? "#1C1C1C" : "transparent",
-                      height: isActive === item.label ? "20px" : "0px",
-                    }}
-                    transition={{ duration: 0.25 }}
-                    className="w-1 rounded-full"
-                  />
-                  
-                  <div className="px-4 py-2 flex items-center gap-2">
-                    <span className="w-5">{item.icon}</span>
-                    <span>{item.label}</span>
-                  </div>
-                </motion.li>
+
+             <li
+              key={item.label}
+              onClick={() => handleActive(item.label)}
+              className={
+                `flex items-center gap-2 rounded-lg cursor-pointer transition-colors duration-200
+                ${isActive === item.label
+                  ? "bg-gray-100 text-[14px] text-black font-semibold dark:bg-white/5 dark:text-white"
+                  : "text-gray-700 dark:text-white"
+                }`
+              }
+            >
+              {/* Left bar */}
+              <span
+                className={`w-1 rounded-full transition-all duration-200
+                  ${isActive === item.label
+                    ? "bg-black h-5 dark:bg-[#C6C7F8]"
+                    : "bg-transparent h-0"
+                  }`}
+              />
+              <div className="px-4 py-2 flex items-center gap-2">
+                <span className="w-5">{item.icon}</span>
+                <span className="text-[14px]">{item.label}</span>
+              </div>
+            </li>
+
+
 
               ))}
             </ul>
@@ -147,35 +139,31 @@ const handleActive =(label)=>{
             <div className="text-xs text-gray-400 mb-1">Projects</div>
             <ul className="space-y-0.5">
               {projectItems.map((item) => (
-                <motion.li
+                <li
                   key={item.label}
                   onClick={() => handleActive(item.label)}
-                  whileHover={{ scale: 1.02 }} // small grow on hover
-                  whileTap={{ scale: 0.98 }}   // small shrink on click
-                  animate={{
-                    backgroundColor: isActive === item.label ? "#f3f4f6" : "transparent", // gray-100
-                    color: isActive === item.label ? "#000" : "#374151", // text-black vs text-gray-700
-                    fontWeight: isActive === item.label ? 600 : 400
-                  }}
-                  transition={{ duration: 0.25 }}
-                  className="flex items-center gap-2 rounded-lg cursor-pointer"
-                >
-                  {/* Left indicator bar */}
-                  <motion.span
-                    layout
-                    animate={{
-                      backgroundColor: isActive === item.label ? "#1C1C1C" : "transparent",
-                      height: isActive === item.label ? "20px" : "0px",
-                    }}
-                    transition={{ duration: 0.25 }}
-                    className="w-1 rounded-full"
+                  className={
+                  `flex items-center gap-2 text-[14px] rounded-lg cursor-pointer transition-colors duration-200
+                  ${isActive === item.label
+                  ? "bg-gray-100 text-black font-semibold dark:bg-white/5 dark:text-white"
+                  : "text-gray-700 dark:text-white"
+                  }`
+                  }
+                  >
+                  {/* Left bar */}
+                  <span
+                  className={`w-1 rounded-full transition-all duration-200
+                  ${isActive === item.label
+                  ? "bg-black h-5 dark:bg-[#C6C7F8]"
+                  : "bg-transparent h-0"
+                  }`}
                   />
-                  
                   <div className="px-4 py-2 flex items-center gap-2">
-                    <span className="w-5">{item.icon}</span>
-                    <span>{item.label}</span>
+                  <span className="w-5">{item.icon}</span>
+                  <span className="text-[14px]">{item.label}</span>
                   </div>
-                </motion.li>
+                </li>
+
               ))}
             </ul>
 

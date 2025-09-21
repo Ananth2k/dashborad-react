@@ -5,10 +5,15 @@ import { motion, AnimatePresence } from 'motion/react';
 import NavBar from '../components/NavBar';
 import SideBar from '../components/SideBar';
 import Notificatoinbar from '../components/Notificatoinbar';
+import {  useSelector } from 'react-redux';
 
 function Home() {
+   const openMenu =  useSelector((state)=>state.menuOpen);
+   const activePage =  useSelector((state)=>state.menuOpen);
 
-    const [currentPage, setCurrentPage] = useState('dashboard');
+   console.log("menu in store",openMenu)
+
+    const [currentPage, setCurrentPage] = useState('orderlist');
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     const renderPage = () => {
@@ -24,8 +29,8 @@ function Home() {
 
 
   return (
-   <div className='flex relative'>
-      <SideBar/>
+   <div className='flex relative bg-white dark:bg-[#1C1C1C]'>
+      {openMenu && <SideBar/>}
       <div className='w-full'>
         <NavBar/>
         <AnimatePresence mode='wait'>

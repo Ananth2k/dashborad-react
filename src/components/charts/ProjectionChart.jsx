@@ -20,20 +20,23 @@ const data = [
 
 export default function ProjectionChart() {
   return (
-    <div className="bg-red-300">
+   <div className="bg-[#F7F9FB] dark:bg-[#ffffff]/5 rounded-2xl">
 
-    <Card elevation={0} className="rounded-2xl w-full max-w-3xl mx-auto p-0 ">
+   
+    <Card 
+    sx={{ backgroundColor: 'transparent'}}
+    elevation={0} className=" bg-[#F7F9FB] w-full max-w-3xl mx-auto p-0 ">
       <CardContent>
-        <Typography variant="h6" className="font-bold mb-2">
+        <h3 className="font-bold mb-2 text-black dark:text-white">
           Projections vs Actuals
-        </Typography>
-        <div className="relative bg-white rounded-xl overflow-hidden w-full" style={{ height: 240 }}>
+        </h3>
+        <div className="mt-3" style={{ height: 176 }}>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data}>
               <CartesianGrid stroke="#F1F5F9" vertical={false} />
               <XAxis
                 dataKey="name"
-                tick={{ fill: "#CBD5E1", fontSize: 16 }}
+                tick={{ fill: "#CBD5E1", fontSize: 12 }}
                 axisLine={false}
                 tickLine={false}
                 padding={{ left: 1, right: 1 }}
@@ -41,7 +44,7 @@ export default function ProjectionChart() {
               <YAxis
               domain={[0, 30]}
               ticks={[0, 10, 20, 30]}
-              tick={{ fill: "#CBD5E1", fontSize: 15 }}
+              tick={{ fill: "#CBD5E1", fontSize: 12 }}
               axisLine={false}
               tickLine={false}
               tickFormatter={(value) => `${value}M`}
@@ -76,6 +79,7 @@ export default function ProjectionChart() {
       </CardContent>
     </Card>
     </div>
+   
 
   );
 }
