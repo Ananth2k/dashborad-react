@@ -30,14 +30,21 @@ export default function NavBar() {
   const [notifyOpen, setNotifyOpen]  = useState(true);
 
 const handleMenu = () => {
-  setOpenMenu(prev => !prev);
-  dispatch(setMenuState(menuOpen)) // toggles between true/false
+  setOpenMenu(prev => {
+    const newState = !prev;
+    dispatch(setMenuState(newState));
+    return newState;
+  });
 };
 
 const handleNotication = () => {
-  setNotifyOpen(prev => !prev);
-  dispatch(setNotification(notifyOpen)) // toggles between true/false
+  setNotifyOpen(prev => {
+    const newState = !prev;
+    dispatch(setNotification(newState));
+    return newState;
+  });
 };
+
   
      const toggleDarkMode = () => {
         document.body.classList.toggle("dark");

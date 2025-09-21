@@ -9,7 +9,7 @@ import {
 } from "recharts";
 
 // Data (values in 'M')
-const data = [
+const dataRev = [
   { name: "Jan", current: 13, previous: 5 },
   { name: "Feb", current: 8, previous: 8 },
   { name: "Mar", current: 10, previous: 15 },
@@ -55,7 +55,7 @@ export default function RevenueLineChart() {
         <CustomLegend />
         <div className="relative rounded-xl overflow-hidden w-full" style={{ height: 270 }}>
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart data={data}>
+            <LineChart data={dataRev}>
               <CartesianGrid stroke="#cedbe8ff" vertical={false} />
               <XAxis
                 dataKey="name"
@@ -97,7 +97,7 @@ export default function RevenueLineChart() {
                 dot={false}
                 isAnimationActive={true}
                 connectNulls
-                points={data.slice(0, dashedIndex + 1)}
+                points={dataRev.slice(0, dashedIndex + 1)}
               />
               {/* Dashed predicted part */}
               <Line
@@ -107,7 +107,7 @@ export default function RevenueLineChart() {
                 strokeWidth={4}
                 dot={false}
                 strokeDasharray="7 7"
-                data={data.map((d, i) =>
+                data={dataRev.map((d, i) =>
                   i < dashedIndex ? { ...d, current: null } : d
                 )}
                 isAnimationActive={true}

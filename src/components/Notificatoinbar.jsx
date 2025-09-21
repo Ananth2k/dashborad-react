@@ -10,9 +10,10 @@ import contact4 from '../assets/contacts/contact-4.png'
 import contact5 from '../assets/contacts/contact-5.png'
 import contact6 from '../assets/contacts/contact-6.png'
 
-import { Bug, UploadCloud, RefreshCw } from "lucide-react";
-function Notificatoinbar() {
 
+import { Bug, UploadCloud, RefreshCw } from "lucide-react";
+
+function Notificatoinbar() {
 
 const notifications = [
     {icon:bug, title:"You have a bug that needs to be fixed.", time:"just now"},
@@ -46,20 +47,16 @@ const contacts = [
 {profile: contact4,name: "Andi Lane"},
 {profile: contact5,name: "Kate Morrison"},
 {profile: contact6,name: "Koray Okumus"},
-
-
 ]
 
-
   return (
-    <div className='border-l border-gray-200 w-130'>
-        
-        <div>        
+    <div className='border-l border-gray-200 w-130'>      
+        <div>         
             <div className='p-3'>
                 <h2 className='font-semibold text-sm'>Notifications</h2>
             </div>
             <div className='p-3'>
-                <AnimatePresence>                
+                <AnimatePresence>                 
                 <ul className='space-y-2'>
                     {
                     notifications.map((notification,id)=>(
@@ -68,7 +65,7 @@ const contacts = [
                         initial={{opacity:0,translateY:24}}
                         animate={{opacity:1, translateY:0}}
                         exit={{opacity:1, translateY:24}}
-                        transition={{duration:0.4, delay: notification.id* 0.08}}
+                        transition={{duration:0.4, delay: id* 0.08}}  // fixed here
                         className='flex items-start gap-3'>
                         <img src={notification.icon} alt="" className='p-2 bg-blue-100 rounded-xl w-8 h-8'/>
                             <div>
@@ -76,14 +73,11 @@ const contacts = [
                                 <span className='text-sm text-black/40'>{notification.time}</span>
                             </div>
                         </motion.li>
-
                     )) 
                     }
-                
                 </ul>
                 </AnimatePresence>
             </div>
-
         </div>
         <div>
              <div className='p-3'>
@@ -134,11 +128,10 @@ const contacts = [
                     
                         <div className="flex flex-col items-center">
                         <img src={item.profile} className="w-[24px] h-[24px] object-cover rounded-full" alt="profile" />
-                       
+                        
                         </div>
                         <div>
                             <h3 className='overflow-hidden truncate w-50 text-ellipsis text-md font-normal'>{item.name}</h3>
-                            <span className='text-sm text-black/40'>{item.time}</span>
                         </div>
                     </motion.div>
                     ))}
@@ -150,3 +143,4 @@ const contacts = [
 }
 
 export default Notificatoinbar
+

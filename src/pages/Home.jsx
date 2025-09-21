@@ -30,7 +30,7 @@ function Home() {
 
   return (
    <div className='flex relative bg-white dark:bg-[#1C1C1C]'>
-      {openMenu && <SideBar activePage={activePage}/>}
+      {openMenu && <SideBar activeCurrentPage={activePage}/>}
       <div className='w-full'>
         <NavBar />
         <AnimatePresence mode='wait'>

@@ -73,7 +73,7 @@ export default function OrderList() {
   
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
-  const rowsPerPage = 2;
+  const rowsPerPage = 10;
 
   const filtered = initialData.filter(
     (d) =>
@@ -151,7 +151,7 @@ export default function OrderList() {
               )}
               {paginated.map((row, idx) => (
                 <motion.tr
-                  key={idx}
+                  key={row.orderId}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}

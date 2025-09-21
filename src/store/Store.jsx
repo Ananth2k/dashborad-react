@@ -1,7 +1,6 @@
-// Store.jsx
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist';
-import {activePageReducer,menuReducer,nofiticationReducer} from './PageSlice';
+import { activePageReducer, menuReducer, notificationReducer } from './PageSlice';
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 
@@ -14,29 +13,29 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-
 const persistConfig = {
   key: 'root',
   storage,
 };
 
-const rootReducer = {
+const reducers = {
   activePage: activePageReducer,
-  menuOpen :menuReducer,
-  nofificationOpen:nofiticationReducer,
+  menuOpen: menuReducer,
+  notificationOpen: notificationReducer,
 };
 
-const persistedReducer = persistReducer(persistConfig, combineReducers(rootReducer));
+const rootReducer = combineReducers(reducers);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   devTools: true,
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware)=>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck:{
-        ignoreActions:[FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      serializableCheck: {
+        ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
       }
-    })
+    }),
 });
 
 export const persistor = persistStore(store);

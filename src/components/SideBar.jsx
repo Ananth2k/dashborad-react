@@ -38,15 +38,17 @@ const projectItems = [
 
 
 
-export default function SideBar({activePage}) {
+export default function SideBar({activeCurrentPage}) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [isActive, setIsActive] = useState(activePage)
+  const [isActive, setIsActive] = useState(activeCurrentPage)
 
   const handleActive =(label)=>{
     setIsActive(label);
     dispatch(setActivePage(label))
   }
+
+  console.log(activeCurrentPage)
 
 
 
