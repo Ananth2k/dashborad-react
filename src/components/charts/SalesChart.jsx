@@ -41,7 +41,7 @@ export default function SalesChart() {
     <Card sx={{ backgroundColor: 'transparent'}}
     elevation={0} className="rounded-2xl w-full mx-auto p-0">
       <CardContent  >
-        <h2 className="font-bold text-black dark:text-white text-[14px] mb-6">
+        <h2 className="text-[#1C1C1C] dark:text-white font-semibold text-[14px] mb-6">
           Total Sales
         </h2>
         <Box className="flex  flex-col items-center my-6">

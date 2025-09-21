@@ -10,7 +10,9 @@ import {  useSelector } from 'react-redux';
 function Home() {
    const openMenu =  useSelector((state)=>state.menuOpen);
    const activePage =  useSelector((state)=>state.activePage);
-   const openNotification =  useSelector((state)=>state.nofificationOpen);
+   const openNotification =  useSelector((state)=>state.notificationOpen);
+
+   console.log("new",openNotification,activePage,openMenu )
 
 
    console.log("menu in store",openNotification)

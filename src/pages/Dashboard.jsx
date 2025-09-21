@@ -8,8 +8,11 @@ import SalesChart from '../components/charts/SalesChart'
 
 function Dashboard() {
   return (
-   <div className='flex bg-white dark:bg-[#1C1C1C] p-[28px]'>    
+   <div className='flex bg-white dark:bg-[#1C1C1C] p-[28px]'> 
+     
     <div className="mx-auto w-full gap-y-[28px] flex flex-col">
+
+      <h2 className='text-[#1C1C1C] dark:text-white font-semibold'>eCommerce</h2> 
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-y-[28px] md:gap-y-0 gap-x-[28px]'>
         <div className='mx-auto w-full'>

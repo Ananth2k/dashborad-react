@@ -27,7 +27,7 @@ export default function ProjectionChart() {
     sx={{ backgroundColor: 'transparent'}}
     elevation={0} className=" bg-[#F7F9FB] w-full max-w-3xl mx-auto p-0 ">
       <CardContent>
-        <h3 className="font-bold mb-2 text-black dark:text-white">
+        <h3 className="text-[#1C1C1C] text-[14px] dark:text-white font-semibold mb-2">
           Projections vs Actuals
         </h3>
         <div className="mt-3" style={{ height: 176 }}>

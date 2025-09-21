@@ -12,7 +12,7 @@ const maxVal = Math.max(...locations.map(l => l.value));
 export default function RevenueByLocationCard() {
   return (
     <div className="bg-[#F7F9FB] dark:bg-[#ffffff]/5 rounded-2xl p-3" >
-      <div className="font-semibold text-black dark:text-white mb-4">Revenue by Location</div>
+      <div className="text-[#1C1C1C] text-[14px] dark:text-white font-semibold mb-4">Revenue by Location</div>
       <div className="relative w-full flex items-center justify-center mb-2">      
        <img src={map} alt="map" className="w-[154px] h-[82px]" />    
        

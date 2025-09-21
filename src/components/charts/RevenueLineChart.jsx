@@ -1,12 +1,6 @@
-import {
-  Card,
-  CardContent,
-  Typography,
-  Box
-} from "@mui/material";
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip
-} from "recharts";
+import {  Card,  CardContent,  Typography,  Box} from "@mui/material";
+import {  LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip} from "recharts";
+import {  useSelector } from 'react-redux';
 
 // Data (values in 'M')
 const dataRev = [
@@ -22,17 +16,18 @@ const dataRev = [
 const dashedIndex = 3; // Dashed from May onward
 
 function CustomLegend() {
+   const openMenu =  useSelector((state)=>state.menuOpen);
   return (
     <div className="flex flex-wrap items-center gap-4 mb-2">
-      <h2 className="mr-4 text-black dark:text-white">
+      <h2 className="mr-4 text-[#1C1C1C] dark:text-white text-[14px] font-semibold">
         Revenue
       </h2>
       <span className="w-[2px] h-4 bg-gray-300"></span>
-      <div className="flex items-center text-sm text-black dark:text-white mr-3">
+      <div className="flex items-center text-sm text-[#1C1C1C] dark:text-white mr-3">
         <span className="inline-block w-2 h-2 rounded-full bg-black mr-2" />
         Current Week <span className="mx-1 font-bold">$58,211</span>
       </div>
-      <div className="flex items-center text-sm text-black dark:text-white">
+      <div className="flex items-center text-sm text-[#1C1C1C] dark:text-white">
         <span className="inline-block w-2 h-2 rounded-full bg-blue-200 mr-2" />
         Previous Week <span className="mx-1 font-bold">$68,768</span>
       </div>
@@ -41,12 +36,12 @@ function CustomLegend() {
 }
 
 export default function RevenueLineChart() {
-
-  const theme = "dark"
+ 
+  const theme =  useSelector((state)=>state.pageTheme);
+  console.log(theme)
+  
   return (
-    <div className="bg-[#F7F9FB] dark:bg-[#ffffff]/5 rounded-2xl">
-
-    
+    <div className="bg-[#F7F9FB] dark:bg-[#ffffff]/5 rounded-2xl">    
     <Card
       elevation={0}
       sx={{ backgroundColor: 'transparent' }}

@@ -59,6 +59,143 @@ const initialData = [
     date: "Feb 2, 2023",
     status: "Rejected"
   },
+  {
+    orderId: "#CM9806",
+    avatar: "https://randomuser.me/api/portraits/women/5.jpg",
+    user: "Koray Okumus",  
+    project: "Website Redesign",
+    address: "Sunset Blvd Los Angeles",
+    date: "Mar 15, 2023",
+  },
+  // ...existing code...
+  {
+    orderId: "#CM9807",
+    avatar: "https://randomuser.me/api/portraits/men/6.jpg",
+    user: "Ethan Hunt",
+    project: "Mobile App",
+    address: "Mission St San Francisco",
+    date: "Mar 20, 2023",
+    status: "Complete"
+  },
+  {
+    orderId: "#CM9808",
+    avatar: "https://randomuser.me/api/portraits/women/7.jpg",
+    user: "Sophia Lee",
+    project: "E-commerce Platform",
+    address: "Market St San Jose",
+    date: "Mar 22, 2023",
+    status: "Pending"
+  },
+  {
+    orderId: "#CM9809",
+    avatar: "https://randomuser.me/api/portraits/men/8.jpg",
+    user: "Liam Smith",
+    project: "Portfolio Website",
+    address: "Broadway New York",
+    date: "Mar 25, 2023",
+    status: "In Progress"
+  },
+  {
+    orderId: "#CM9810",
+    avatar: "https://randomuser.me/api/portraits/women/9.jpg",
+    user: "Olivia Brown",
+    project: "Blog Redesign",
+    address: "Ocean Ave Miami",
+    date: "Mar 28, 2023",
+    status: "Approved"
+  },
+  {
+    orderId: "#CM9811",
+    avatar: "https://randomuser.me/api/portraits/men/10.jpg",
+    user: "Noah Wilson",
+    project: "Dashboard Analytics",
+    address: "King St Seattle",
+    date: "Mar 30, 2023",
+    status: "Rejected"
+  },
+  // ...existing code...
+  {
+    orderId: "#CM9812",
+    avatar: "https://randomuser.me/api/portraits/women/11.jpg",
+    user: "Emily Clark",
+    project: "Social Media App",
+    address: "Elm St Dallas",
+    date: "Apr 2, 2023",
+    status: "Complete"
+  },
+  {
+    orderId: "#CM9813",
+    avatar: "https://randomuser.me/api/portraits/men/12.jpg",
+    user: "Michael Green",
+    project: "Inventory System",
+    address: "Pine St Denver",
+    date: "Apr 5, 2023",
+    status: "Pending"
+  },
+  {
+    orderId: "#CM9814",
+    avatar: "https://randomuser.me/api/portraits/women/13.jpg",
+    user: "Jessica Adams",
+    project: "Booking Platform",
+    address: "Maple Ave Boston",
+    date: "Apr 8, 2023",
+    status: "In Progress"
+  },
+  {
+    orderId: "#CM9815",
+    avatar: "https://randomuser.me/api/portraits/men/14.jpg",
+    user: "David Lee",
+    project: "HR Portal",
+    address: "Cedar Rd Austin",
+    date: "Apr 10, 2023",
+    status: "Approved"
+  },
+  {
+    orderId: "#CM9816",
+    avatar: "https://randomuser.me/api/portraits/women/15.jpg",
+    user: "Sarah Miller",
+    project: "Finance Dashboard",
+    address: "Birch St Portland",
+    date: "Apr 12, 2023",
+    status: "Rejected"
+  },
+  {
+    orderId: "#CM9817",
+    avatar: "https://randomuser.me/api/portraits/men/16.jpg",
+    user: "Chris Evans",
+    project: "Learning Management",
+    address: "Spruce St Atlanta",
+    date: "Apr 15, 2023",
+    status: "Complete"
+  },
+  {
+    orderId: "#CM9818",
+    avatar: "https://randomuser.me/api/portraits/women/17.jpg",
+    user: "Anna Scott",
+    project: "Event Scheduler",
+    address: "Willow St Chicago",
+    date: "Apr 18, 2023",
+    status: "Pending"
+  },
+  {
+    orderId: "#CM9819",
+    avatar: "https://randomuser.me/api/portraits/men/18.jpg",
+    user: "Ryan Hall",
+    project: "Ticketing System",
+    address: "Ash St Houston",
+    date: "Apr 20, 2023",
+    status: "In Progress"
+  },
+  {
+    orderId: "#CM9820",
+    avatar: "https://randomuser.me/api/portraits/women/19.jpg",
+    user: "Laura King",
+    project: "Survey Tool",
+    address: "Chestnut St Phoenix",
+    date: "Apr 22, 2023",
+    status: "Approved"
+  },
+
 ];
 
 const statusColors = {
@@ -86,7 +223,7 @@ export default function OrderList() {
   const paginated = filtered.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
   return (
-    <div className="w-full p-3 bg-white dark:bg-[#1C1C1C] mx-auto overflow-hidden">
+    <div className="w-full p-3 md:min-h-[1000px] bg-white dark:bg-[#1C1C1C] mx-auto overflow-y-hidden">
       {/* Top Controls */}
       <div className="flex my-2 mx-3 items-center justify-between rounded-lg py-2 px-2 gap-2 flex-wrap bg-[#F7F9FB] dark:bg-white/5">
         <div className="flex gap-2 px-4 items-center">

@@ -1,5 +1,5 @@
-import React from 'react'
-import { motion, AnimatePresence } from "motion/react";
+import React, { useState } from 'react'
+import { motion, AnimatePresence, useScroll } from "motion/react";
 import bug from '../assets/notification-icons/BugBeetle.svg'
 import profile from '../assets/notification-icons/profile.svg'
 import hotspot from '../assets/notification-icons/hotspot.svg'
@@ -9,10 +9,10 @@ import contact3 from '../assets/contacts/contact-3.png'
 import contact4 from '../assets/contacts/contact-4.png'
 import contact5 from '../assets/contacts/contact-5.png'
 import contact6 from '../assets/contacts/contact-6.png'
-
-
-import { Bug, UploadCloud, RefreshCw } from "lucide-react";
-
+import { useSelector, useDispatch } from "react-redux";
+import { Bug, UploadCloud, RefreshCw, ChevronRight } from "lucide-react";
+import { setNotification } from "../store/PageSlice";
+ 
 function Notificatoinbar() {
 
 const notifications = [
@@ -48,12 +48,22 @@ const contacts = [
 {profile: contact5,name: "Kate Morrison"},
 {profile: contact6,name: "Koray Okumus"},
 ]
+  const dispatch = useDispatch();
+
+  const menuOpen = useSelector((state) => state.notificationOpen);
+  const handleMenu = () => {
+    dispatch(setNotification(!menuOpen));
+  };
 
   return (
-    <div className='border-l border-gray-200 w-130'>      
+    <div className='border-l bg-white dark:bg-[#1C1C1C] z-50 right-0 top-0 w-60 border-gray-200 md:w-130 fixed md:static'>      
         <div>         
             <div className='p-3'>
-                <h2 className='font-semibold text-sm'>Notifications</h2>
+                <ChevronRight
+                className="bg-gray-200 md:hidden rounded-sm cursor-pointer mb-3"
+                onClick={handleMenu}
+              />
+                <h2 className='font-semibold text-black dark:text-white text-[14px]'>Notifications</h2>
             </div>
             <div className='p-3'>
                 <AnimatePresence>                 
@@ -69,8 +79,8 @@ const contacts = [
                         className='flex items-start gap-3'>
                         <img src={notification.icon} alt="" className='p-2 bg-blue-100 rounded-xl w-8 h-8'/>
                             <div>
-                                <h3 className='overflow-hidden truncate w-50 text-ellipsis text-md font-normal'>{notification.title}</h3>
-                                <span className='text-sm text-black/40'>{notification.time}</span>
+                                <h3 className='overflow-hidden text-black dark:text-white truncate w-50 text-ellipsis text-[14px] font-normal'>{notification.title}</h3>
+                                <span className='text-[12px] text-black/40 dark:text-white/50 '>{notification.time}</span>
                             </div>
                         </motion.li>
                     )) 
@@ -81,7 +91,7 @@ const contacts = [
         </div>
         <div>
              <div className='p-3'>
-                <h2 className='font-semibold text-sm'>Activities</h2>
+                <h2 className='font-semibold text-black dark:text-white text-[14px]'>Activities</h2>
             </div>        
             <div className="p-4 max-w-sm mx-auto flex flex-col gap-4">
                 <AnimatePresence>
@@ -102,8 +112,8 @@ const contacts = [
                         )}
                         </div>
                         <div>
-                            <h3 className='overflow-hidden truncate w-50 text-ellipsis text-md font-normal'>{item.message}</h3>
-                            <span className='text-sm text-black/40'>{item.time}</span>
+                            <h3 className='overflow-hidden truncate w-50 text-black dark:text-white text-ellipsis text-[14px] font-normal'>{item.message}</h3>
+                            <span className='text-[12px] text-black/40 dark:text-white/50'>{item.time}</span>
                         </div>
                     </motion.div>
                     ))}
@@ -112,7 +122,7 @@ const contacts = [
         </div>
         <div>
              <div className='p-3'>
-                <h2 className='font-semibold text-sm'>Activities</h2>
+                <h2 className='font-semibold text-black dark:text-white text-[14px]'>Contacts</h2>
             </div>        
             <div className="p-4 max-w-sm mx-auto flex flex-col gap-4">
                 <AnimatePresence>
@@ -131,7 +141,7 @@ const contacts = [
                         
                         </div>
                         <div>
-                            <h3 className='overflow-hidden truncate w-50 text-ellipsis text-md font-normal'>{item.name}</h3>
+                            <h3 className='overflow-hidden truncate w-50 text-black dark:text-white text-ellipsis text-[14px] font-normal'>{item.name}</h3>
                         </div>
                     </motion.div>
                     ))}

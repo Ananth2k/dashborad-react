@@ -31,6 +31,16 @@ const NotificationSlice = createSlice({
     }
 });
 
+const PageThemeSlice =  createSlice({
+    name: "pageTheme",
+    initialState: 'light',
+    reducers:{
+        setPageTheme(state, action){
+            return action.payload
+        }
+    }
+})
+
 export const { setActivePage } = PageSlice.actions;
 export const activePageReducer = PageSlice.reducer;
 
@@ -39,3 +49,6 @@ export const menuReducer = MenuSlice.reducer;
 
 export const { setNotification } = NotificationSlice.actions;
 export const notificationReducer = NotificationSlice.reducer;
+
+export const { setPageTheme } = PageThemeSlice.actions;
+export const pageThemeReducer = PageThemeSlice.reducer;

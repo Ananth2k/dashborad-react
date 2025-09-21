@@ -10,45 +10,60 @@ import {
 
 } from "lucide-react";
 import sidebaricon from "../assets/sidebaricon.svg"
-import {setMenuState,setNotification} from "../store/PageSlice"
+import {setMenuState,setNotification,setPageTheme} from "../store/PageSlice"
 import timer  from "../assets/timer.svg"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 
 
 export default function NavBar() {
   const dispatch = useDispatch();
 
-  const openMenu =  useSelector((state)=>state.menuOpen);
+  const menuOpen =  useSelector((state)=>state.menuOpen);
    const activePage =  useSelector((state)=>state.activePage);
 
   // console.log("nav",isActive)
 
    
   
-  const [menuOpen, setOpenMenu] = useState(true);
-  const [notifyOpen, setNotifyOpen]  = useState(true);
+ 
+  const [notifyOpen, setNotifyOpen]  = useState(false);
 
-const handleMenu = () => {
-  setOpenMenu(prev => {
-    const newState = !prev;
-    dispatch(setMenuState(newState));
-    return newState;
-  });
-};
+
+  const handleMenu = () => {
+    dispatch(setMenuState(!menuOpen));
+  };
 
 const handleNotication = () => {
   setNotifyOpen(prev => {
     const newState = !prev;
     dispatch(setNotification(newState));
+    // console.log("from nab",newState)
     return newState;
   });
 };
 
-  
-     const toggleDarkMode = () => {
-        document.body.classList.toggle("dark");
-      };
+const theme =  useSelector((state)=>state.pageTheme);
+
+// console.log("page theme",theme)
+
+const [themeClr, setThemeClr] = useState("light");
+
+const toggleDarkMode = () => {
+  if (themeClr === "light") {
+    document.body.classList.add("dark");
+    setThemeClr("dark");
+    dispatch(setPageTheme("dark"));
+  } else {
+    document.body.classList.remove("dark");
+    setThemeClr("light");
+    dispatch(setPageTheme("light"));
+  }
+};
+
+
+
+
 // console.log("menu in nav",menuOpen)
 
   return (
@@ -56,9 +71,9 @@ const handleNotication = () => {
       {/* Left: Dashboard/Menu/Breadcrumb */}
       <div className="flex items-center gap-3 min-w-0">
         <Menu className="w-5 cursor-pointer h-5 text-black dark:text-white" onClick={handleMenu} />  
-        <Star className="w-5 cursor-pointer h-5 none md:block   text-black dark:text-white" />
-        <span className="text-gray-400 text-sm none md:block font-medium whitespace-nowrap">Dashboards</span>
-        <span className="mx-2 text-gray-300 none md:block">/</span>
+        <Star className="w-5 cursor-pointer h-5 hidden md:block   text-black dark:text-white" />
+        <span className="text-gray-400 text-sm hidden md:block font-medium whitespace-nowrap">Dashboards</span>
+        <span className="mx-2 text-gray-300 hidden md:block">/</span>
         <span className="font-semibold text-black dark:text-white text-sm truncate">{activePage}</span>
       </div>     
       {/* Right controls */}
@@ -67,7 +82,7 @@ const handleNotication = () => {
         <div className="relative w-full">
           <input
             type="text"
-            className="bg-gray-100 dark:bg-white/10 rounded-lg px-4 pl-10 py-2 w-full text-sm outline-none transition focus:ring-2 focus:ring-gray-200 text-black dark:text-white placeholder-black dark:placeholder-white"
+            className="bg-gray-100 dark:bg-white/10 rounded-lg px-4 pl-10 py-2 w-full text-sm outline-hidden transition focus:ring-2 focus:ring-gray-200 text-black dark:text-white placeholder-black dark:placeholder-white"
             placeholder="Search"
             style={{ minWidth: 110 }}
           />
