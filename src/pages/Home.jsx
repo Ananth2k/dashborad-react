@@ -12,10 +12,8 @@ function Home() {
    const activePage =  useSelector((state)=>state.activePage);
    const openNotification =  useSelector((state)=>state.notificationOpen);
 
-   console.log("new",openNotification,activePage,openMenu )
 
 
-   console.log("menu in store",openNotification)
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     const renderPage = () => {

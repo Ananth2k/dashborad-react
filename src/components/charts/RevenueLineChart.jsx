@@ -38,7 +38,6 @@ function CustomLegend() {
 export default function RevenueLineChart() {
  
   const theme =  useSelector((state)=>state.pageTheme);
-  console.log(theme)
   
   return (
     <div className="bg-[#F7F9FB] dark:bg-[#ffffff]/5 rounded-2xl">    

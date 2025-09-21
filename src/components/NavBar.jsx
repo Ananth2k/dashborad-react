@@ -22,7 +22,6 @@ export default function NavBar() {
   const menuOpen =  useSelector((state)=>state.menuOpen);
    const activePage =  useSelector((state)=>state.activePage);
 
-  // console.log("nav",isActive)
 
    
   
@@ -38,14 +37,12 @@ const handleNotication = () => {
   setNotifyOpen(prev => {
     const newState = !prev;
     dispatch(setNotification(newState));
-    // console.log("from nab",newState)
     return newState;
   });
 };
 
 const theme =  useSelector((state)=>state.pageTheme);
 
-// console.log("page theme",theme)
 
 const [themeClr, setThemeClr] = useState("light");
 
@@ -64,7 +61,6 @@ const toggleDarkMode = () => {
 
 
 
-// console.log("menu in nav",menuOpen)
 
   return (
     <nav className="w-full border-b border-gray-200 bg-white dark:bg-[#1C1C1C] flex items-center justify-between px-4 py-2">
