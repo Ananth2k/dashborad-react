@@ -10,7 +10,7 @@ import {
 
 } from "lucide-react";
 import sidebaricon from "../assets/sidebaricon.svg"
-import {setMenuState} from "../store/PageSlice"
+import {setMenuState,setNotification} from "../store/PageSlice"
 import timer  from "../assets/timer.svg"
 import { useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
@@ -20,29 +20,39 @@ export default function NavBar() {
   const dispatch = useDispatch();
 
   const openMenu =  useSelector((state)=>state.menuOpen);
+   const activePage =  useSelector((state)=>state.activePage);
+
+  // console.log("nav",isActive)
+
    
   
   const [menuOpen, setOpenMenu] = useState(true);
+  const [notifyOpen, setNotifyOpen]  = useState(true);
 
 const handleMenu = () => {
   setOpenMenu(prev => !prev);
   dispatch(setMenuState(menuOpen)) // toggles between true/false
 };
+
+const handleNotication = () => {
+  setNotifyOpen(prev => !prev);
+  dispatch(setNotification(notifyOpen)) // toggles between true/false
+};
   
      const toggleDarkMode = () => {
         document.body.classList.toggle("dark");
       };
-console.log("menu in nav",menuOpen)
+// console.log("menu in nav",menuOpen)
 
   return (
     <nav className="w-full border-b border-gray-200 bg-white dark:bg-[#1C1C1C] flex items-center justify-between px-4 py-2">
       {/* Left: Dashboard/Menu/Breadcrumb */}
       <div className="flex items-center gap-3 min-w-0">
-        <Menu className="w-5 h-5 text-black dark:text-white" onClick={handleMenu} />  
-        <Star className="w-5 h-5 hidden md:visible text-black dark:text-white" />
-        <span className="text-gray-400 text-sm hidden md:visible font-medium whitespace-nowrap">Dashboards</span>
-        <span className="mx-2 text-gray-300 hidden md:visible">/</span>
-        <span className="font-semibold text-black dark:text-white text-sm truncate">Default</span>
+        <Menu className="w-5 cursor-pointer h-5 text-black dark:text-white" onClick={handleMenu} />  
+        <Star className="w-5 cursor-pointer h-5 none md:block   text-black dark:text-white" />
+        <span className="text-gray-400 text-sm none md:block font-medium whitespace-nowrap">Dashboards</span>
+        <span className="mx-2 text-gray-300 none md:block">/</span>
+        <span className="font-semibold text-black dark:text-white text-sm truncate">{activePage}</span>
       </div>     
       {/* Right controls */}
       <div className="flex items-center gap-3">
@@ -60,10 +70,10 @@ console.log("menu in nav",menuOpen)
           <div className="absolute right-2 top-1/2 -translate-y-1/2 px-1 bg-gray-200 dark:bg-white/20 text-[11px] rounded text-gray-500 dark:text-white hidden md:block">⌘/</div>
         </div>
       </div>
-        <Sun className="w-5 h-5 text-black dark:text-white"  onClick={toggleDarkMode} />
-       <History className="w-5 h-5 text-black dark:text-white"/>
-        <Bell className="w-5 h-5 text-black dark:text-white" />
-        <Menu className="w-5 h-5 text-black dark:text-white" />      
+        <Sun className="cursor-pointer w-5 h-5 text-black dark:text-white"  onClick={toggleDarkMode} />
+        <History className="cursor-pointer w-5 h-5 text-black dark:text-white"/>
+        <Bell className="cursor-pointer w-5 h-5 text-black dark:text-white" onClick={handleNotication}/>
+        <Menu className="cursor-pointer w-5 h-5 text-black dark:text-white" onClick={handleNotication}/>      
       </div>
     </nav>
   );

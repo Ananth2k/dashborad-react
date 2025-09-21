@@ -7,13 +7,15 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 import { useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
+import {setMenuState,setActivePage} from "../store/PageSlice"
+
 
 
 
 
 const dashboardItems = [
   { label: "Default", icon: <LayoutDashboard /> },
-  { label: "Ordder List", icon: <List /> },
+  { label: "Order List", icon: <List /> },
   { label: "Performance", icon: <TrendingUp /> },
   { label: "Online Courses", icon: <PlayCircle /> }
 ];
@@ -36,15 +38,16 @@ const projectItems = [
 
 
 
-export default function SideBar() {
+export default function SideBar({activePage}) {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [isActive, setIsActive] = useState("Default")
+  const [isActive, setIsActive] = useState(activePage)
+
   const handleActive =(label)=>{
     setIsActive(label);
+    dispatch(setActivePage(label))
   }
 
-  console.log(isActive)
 
 
   // For mobile: toggle

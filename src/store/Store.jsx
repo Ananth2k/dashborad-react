@@ -1,7 +1,7 @@
 // Store.jsx
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from 'redux-persist';
-import {activePageReducer,menuReducer} from './PageSlice';
+import {activePageReducer,menuReducer,nofiticationReducer} from './PageSlice';
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "redux";
 
@@ -23,6 +23,7 @@ const persistConfig = {
 const rootReducer = {
   activePage: activePageReducer,
   menuOpen :menuReducer,
+  nofificationOpen:nofiticationReducer,
 };
 
 const persistedReducer = persistReducer(persistConfig, combineReducers(rootReducer));

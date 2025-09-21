@@ -15,7 +15,17 @@ const MenuSlice = createSlice({
     name : 'openMenu',
     initialState:true,
     reducers:{
-        setMenuState(satet, action){
+        setMenuState(state, action){
+            return action.payload
+        }
+    }
+})
+
+const NotificationSlice = createSlice({
+    name:'openNotification',
+    initialState:false,
+    reducers:{
+        setNotification(state, action){
             return action.payload
         }
     }
@@ -26,3 +36,6 @@ export const activePageReducer = PageSlice.reducer;
 
 export const {setMenuState} = MenuSlice.actions;
 export const menuReducer = MenuSlice.reducer;
+
+export const {setNotification} = NotificationSlice.actions;
+export const nofiticationReducer = NotificationSlice.reducer;

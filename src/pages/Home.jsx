@@ -9,18 +9,18 @@ import {  useSelector } from 'react-redux';
 
 function Home() {
    const openMenu =  useSelector((state)=>state.menuOpen);
-   const activePage =  useSelector((state)=>state.menuOpen);
+   const activePage =  useSelector((state)=>state.activePage);
+   const openNotification =  useSelector((state)=>state.nofificationOpen);
 
-   console.log("menu in store",openMenu)
 
-    const [currentPage, setCurrentPage] = useState('orderlist');
+   console.log("menu in store",openNotification)
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
     const renderPage = () => {
-        switch (currentPage) {
-        case 'dashboard':
+        switch (activePage) {
+        case 'Default':
             return <Dashboard />;
-        case 'orderlist':
+        case 'Order List':
             return <OrderList />;
         default:
             return <Dashboard />;
@@ -30,9 +30,9 @@ function Home() {
 
   return (
    <div className='flex relative bg-white dark:bg-[#1C1C1C]'>
-      {openMenu && <SideBar/>}
+      {openMenu && <SideBar activePage={activePage}/>}
       <div className='w-full'>
-        <NavBar/>
+        <NavBar />
         <AnimatePresence mode='wait'>
         <main className='bg-white'>
           <motion.div 
@@ -47,7 +47,7 @@ function Home() {
         </main>
         </AnimatePresence>
       </div>
-      {/* <Notificatoinbar/> */}
+      {openNotification && <Notificatoinbar/>}
       
        
     </div>
